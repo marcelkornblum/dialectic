@@ -58,6 +58,14 @@ While any and all topics should be viewable by an interested member, the sheer a
 
 The interface will ultimately allow users to follow topics and policies to ensure they’re kept up to date, as well as presenting topics to users in a variety of ways, intending to ensure that users have the chance to interact with items in the order that they feel is most important.
 
+# Status
+
+Work on this has literally only just begun, so please be patient.
+
 # Contribution
 
 Please feel free to fork this repo. Ultimately we'll want pull requests and contributors, but to start with the aim is to get the structure in place. If you're interested in collaborating, please mail the author (or contact via GitHub).
+
+# More
+
+Investigate the [docs section](./docs/README.md).

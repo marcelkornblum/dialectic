@@ -1,5 +1,7 @@
 [Overview](../README.md)
 
+[Current Status](./STATUS.md)
+
 [Installation](./INSTALL.md)
 
 [Developing](./DEVELOPING.md)
@@ -10,4 +12,4 @@
 
 [Feature Roadmap](./ROADMAP.md)
 
-[License (GPV v3)](../LICENSE)
+[License (GPL v3)](../LICENSE)
