@@ -4,11 +4,11 @@
 
 ## Overview
 
-A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK Populace party, it aims to allow party membership to engage fully with each other, a party leadership and hopefully their MPs in government.
+A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK's [Populace party](http://www.wearepopulace.uk/), it aims to allow party membership to engage fully with each other, a party leadership and hopefully their MPs in government.
 
 The system intends to promote rational, measured debate and foster creative decisionmaking. It will also discourage antisocial and intolerant behaviour in order to encourage the widest, most open participation possible.
 
-The system will be Open Source and with an open use license, the [GPL V3](./LICENSE), allowing other organisations to make use of it at will, as well as allowing any interested parties to examine its inner workings, or contribute to its development.
+The system is Open Source and uses an open license, the [GPL V3](./LICENSE), allowing other organisations to make use of it for open purposes, as well as allowing any interested parties to examine its inner workings, or contribute to its development.
 
 # Features
 
