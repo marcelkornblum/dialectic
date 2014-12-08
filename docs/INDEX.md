@@ -9,3 +9,5 @@
 [Back End Overview](../svr/README.md)
 
 [Feature Roadmap](./ROADMAP.md)
+
+[License (GPV v3)](../LICENSE)
