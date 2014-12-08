@@ -38,8 +38,12 @@ if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
         su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /www/repo"
     fi
     if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
-        echo -e "\033[0;31m >> ENV config file not found. Please ensure it's in the repo and re-provision. << \033[0m"
-        exit 1
+        if [ ! -e /vagrant/cfg/cfg-$ENV.sh ]; then
+            echo -e "\033[0;31m >> ENV config file not found. Please ensure it's in the repo and re-provision. << \033[0m"
+            exit 1
+        else
+            source /vagrant/cfg/cfg-$ENV.sh
+        fi
     else
         # for first time repo setup, grab the env vars now
         source /www/repo/svr/cfg/cfg-$ENV.sh
