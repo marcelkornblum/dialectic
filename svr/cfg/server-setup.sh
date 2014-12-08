@@ -32,7 +32,11 @@ pip install virtualenv virtualenvwrapper
 mkdir -p /www/$ENV
 chown -R $USER:$USER /www
 if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
-    su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /www/repo"
+    if [ -d /www/repo ]; then
+        su - $USER -c "git -C /www/repo pull"
+    else
+        su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /www/repo"
+    fi
     if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
         echo -e "\033[0;31m >> ENV config file not found. Please ensure it's in the repo and re-provision. << \033[0m"
         exit 1
