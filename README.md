@@ -6,29 +6,29 @@ You might also want to read the [documentation](https://github.com/marcelkornblu
 
 ## Overview
 
-A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK's [Populace party](http://www.wearepopulace.uk/), it aims to allow party membership to engage fully with each other, a party leadership and hopefully their MPs in government.
+A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK's [Populace party](http://www.wearepopulace.uk/), it aims to allow its membership to engage fully with each other and ultimately -- hopefully -- their MPs in government.
 
-The system intends to promote rational, measured debate and foster creative decisionmaking. It will also discourage antisocial and intolerant behaviour in order to encourage the widest, most open participation possible.
+Dialectic (working title) intends to promote rational, measured debate and foster creative decisionmaking. It will also discourage antisocial and intolerant behaviour in order to encourage the widest, most open participation possible.
 
-The system is Open Source and uses an open license, the [GPL V3](./LICENSE), allowing other organisations to make use of it for open purposes, as well as allowing any interested parties to examine its inner workings, or contribute to its development.
+The system is Open Source and uses an open license, the [GPL V3](https://github.com/marcelkornblum/dialectic/blob/master/LICENSE), allowing other organisations to make use of it for open purposes, as well as allowing any interested parties to examine its inner workings, or contribute to its development.
 
 # Features
 
 ## Discussion
 
-The core of the system will be an interface geared towards dialectical discussion of issues; rational and evidence-based debate and exploration of related issues as well as evaluation of sources of information will all be prominently supported.
+The core of the system will be an interface geared towards dialectical discussion of issues. Rational and evidence-based debate and exploration of related issues, as well as evaluation of sources of information will all be prominently supported.
 
-The intention is for a user new to a policy point to be able to quickly see the main points of discussion as well as get a feel for the general dispositions of the participants. Further engagement should allow the user to explore all relevant evidence and opinion and give their own opinion - both on the main points and on the evidence itself.
+The intention is for a user new to a policy discussion to be able to quickly see the main points of discussion and get a feel for the general dispositions of the participants. Further engagement should allow the user to explore all relevant evidence and opinion and give their own opinion -- both on the main points and on the evidence itself.
 
 ## Voting
 
-A very important part of the system will be allowing for votes on issues. Voting may happen in both fixed- and open-ended scenarios, such that an open vote issue will evolve over time as new voters join in and existing voters change their minds.
+A very important part of the system will be allowing for votes on issues. Voting may happen in both fixed- and open-ended scenarios, such that an open vote issue will evolve over time as new voters join in and existing voters change their minds while a fixed-time vote would be a snapshot at a particular moment, which may be needed to decide policy in practice.
 
 Voting will take place using algorithms developed for fair voting in democracy; where the vote is to decide multiple ‘winners’, STV with Meek counting will be used, while for single-outcome votes the system will use Condorcet voting. Both methods require voters to order their preferences and result in what are commonly seen as the ‘fairest’ results.
 
 ## Community
 
-The aim of the site will be to foster an active, open community. Light gamification techniques in common use in popular web forums will be employed, such as a point and badge system for users that can indicate their value and commitment to the site, and may be used for certain actions.
+The aim of the site will be to foster an active, open community. Light gamification techniques commonly used in popular web forums will be employed, such as a point and badge system for users that can indicate their contributions and commitment to the site, and which may unlock or be spent to perform certain actions.
 
 The aim would be that active community members ultimately carry out most of the moderation and community management that any such property will require.
 
@@ -36,7 +36,7 @@ The aim would be that active community members ultimately carry out most of the 
 
 All general discussion pages, and the site in general, will be widely visible to the general public. Some member information may be restricted.
 
-Members will be required to authenticate with the site before contributing to any debate, and a high level of verification (multi-factor) will be required before committing certain actions: suggesting debate topics or voting.
+Members will be required to authenticate with the site before contributing to any debate, and a high level of verification (multi-factor) will be required before committing certain actions such as suggesting debate topics or voting.
 
 Membership will only be open to eligible UK voters and those who will be eligible to vote at the next General Election. This is because it’s important that the views expressed and decisions made relate to the UK as a political entity.
 
