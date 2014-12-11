@@ -2,6 +2,8 @@
 
 > A tool for political engagement
 
+You might also want to read the [documentation](./docs/README.md) or the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
+
 ## Overview
 
 A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK's [Populace party](http://www.wearepopulace.uk/), it aims to allow party membership to engage fully with each other, a party leadership and hopefully their MPs in government.
@@ -58,6 +60,14 @@ While any and all topics should be viewable by an interested member, the sheer a
 
 The interface will ultimately allow users to follow topics and policies to ensure they’re kept up to date, as well as presenting topics to users in a variety of ways, intending to ensure that users have the chance to interact with items in the order that they feel is most important.
 
+# Status
+
+Work on this has literally only just begun, so please be patient.
+
 # Contribution
 
-Please feel free to fork this repo. Ultimately we'll want pull requests and contributors, but to start with the aim is to get the structure in place. If you're interested in collaborating, please mail the author (or contact via GitHub).
+Please feel free to fork this repo. Ultimately we'll want pull requests and contributors, but to start with the aim is to get the structure in place. If you're interested in collaborating, please mail the author (or contact via GitHub), or read up on (and update) the  [wiki](https://github.com/marcelkornblum/dialectic/wiki).
+
+# More
+
+Investigate the [docs section](./docs/README.md) or read the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
