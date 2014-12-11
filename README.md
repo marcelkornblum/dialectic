@@ -2,6 +2,8 @@
 
 > A tool for political engagement
 
+You might also want to read the [documentation](./docs/README.md) or the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
+
 ## Overview
 
 A system to enable UK voters to discuss and collaboratively form policies. Created alongside the formation of the UK's [Populace party](http://www.wearepopulace.uk/), it aims to allow party membership to engage fully with each other, a party leadership and hopefully their MPs in government.
