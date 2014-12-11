@@ -64,8 +64,8 @@ Work on this has literally only just begun, so please be patient.
 
 # Contribution
 
-Please feel free to fork this repo. Ultimately we'll want pull requests and contributors, but to start with the aim is to get the structure in place. If you're interested in collaborating, please mail the author (or contact via GitHub).
+Please feel free to fork this repo. Ultimately we'll want pull requests and contributors, but to start with the aim is to get the structure in place. If you're interested in collaborating, please mail the author (or contact via GitHub), or read up on (and update) the  [wiki](https://github.com/marcelkornblum/dialectic/wiki).
 
 # More
 
-Investigate the [docs section](./docs/README.md).
+Investigate the [docs section](./docs/README.md) or read the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
