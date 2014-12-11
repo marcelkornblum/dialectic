@@ -2,7 +2,7 @@
 
 > A tool for political engagement
 
-You might also want to read the [documentation](./docs/README.md) or the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
+You might also want to read the [documentation](https://github.com/marcelkornblum/dialectic/blob/master/docs/README.md) or the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
 
 ## Overview
 
@@ -70,4 +70,4 @@ Please feel free to fork this repo. Ultimately we'll want pull requests and cont
 
 # More
 
-Investigate the [docs section](./docs/README.md) or read the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
+Investigate the [docs section](https://github.com/marcelkornblum/dialectic/blob/master/docs/README.md) or read the [wiki](https://github.com/marcelkornblum/dialectic/wiki).
