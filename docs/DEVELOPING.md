@@ -1,7 +1,7 @@
 # Developing
 
-## Standards
+If you'd like to contribute or customise this codebase for your own use, please feel free (within the bounds of the [license](../LICENSE)).
 
-Git Flow
+To get set up with the development environment for the project, follow the [Getting Started](./GETTING_STARTED.md) guide.
 
-pep8 for Python and JS
+To submit fixes and features back into the main codebase, please read up on [contributing](./CONTRIBUTING.md). We aim to follow various [standards](./STANDARDS.md), which it's worth taking a look at before submitting your code.

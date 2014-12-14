@@ -4,12 +4,18 @@
 
 [Installation](./INSTALL.md)
 
-[Developing](./DEVELOPING.md)
+[System Overview](./SYSTEM.md)
 
-[Front End Overview](../clt/README.md)
+[Developing and Contributing](./DEVELOPING.md)
 
-[Back End Overview](../svr/README.md)
+[Front End Technologies](../clt/README.md)
+
+[Back End Technologies](../svr/README.md)
 
 [Feature Roadmap](./ROADMAP.md)
+
+[Latest Release Notes](./release_notes/latest.md)
+
+[Credits](./CREDITS.md)
 
 [License (GPL v3)](../LICENSE)
