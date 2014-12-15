@@ -1,6 +1,6 @@
 # Developing
 
-If you'd like to contribute or customise this codebase for your own use, please feel free (within the bounds of the [GPL v3 license](../LICENSE) - [here's a guide](https://www.gnu.org/licenses/quick-guide-gplv3.html) to what it means).
+If you'd like to contribute or customise this codebase for your own use, please feel free (within the bounds of the [GPL v3 license](../LICENSE) - here's [a guide to what it means](https://www.gnu.org/licenses/quick-guide-gplv3.html)).
 
 To get set up with the development environment for the project, follow the [Getting Started](./GETTING_STARTED.md) guide.
 
