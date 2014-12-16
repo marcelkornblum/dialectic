@@ -6,7 +6,7 @@
 # Grab the environment var, default to 'dev'
 ENV=${1-dev}
 # ... and pick up related vars
-source /www/repo/svr/cfg-$ENV.sh
+source /www/repo/svr/cfg/cfg-$ENV.sh
 
 # Grab the user var, default to 'vagrant'
 USER=${2-vagrant}
