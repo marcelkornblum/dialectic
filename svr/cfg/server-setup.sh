@@ -7,7 +7,7 @@
 # Grab the environment var, default to 'dev'
 ENV=${1-dev}
 # ... and pick up related vars
-source /www/repo/svr/cfg/cfg-$ENV.sh
+source /var/www/repo/svr/cfg/cfg-$ENV.sh
 
 # Grab the user var, default to 'ubuntu'
 USER=${2-ubuntu}
@@ -24,20 +24,20 @@ apt-get install -y git vim
 apt-get install -y nginx supervisor
 
 # Python environment and tools
-apt-get install -y python-setuptools python2.7 build-essential python-dev libncurses5-dev fabric
+apt-get install -y python-setuptools python2.7 build-essential python-dev fabric
 easy_install pip
 pip install virtualenv virtualenvwrapper
 
 # Ensure directory and repo in place
-mkdir -p /www/$ENV
-chown -R $USER:$USER /www
-if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
-    if [ -d /www/repo ]; then
-        su - $USER -c "git -C /www/repo pull"
+mkdir -p /var/www/$ENV
+chown -R $USER:$USER /var/www
+if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
+    if [ -d /var/www/repo ]; then
+        su - $USER -c "git -C /var/www/repo pull"
     else
-        su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /www/repo"
+        su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /var/www/repo"
     fi
-    if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
+    if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
         if [ ! -e /vagrant/cfg/cfg-$ENV.sh ]; then
             echo -e "\033[0;31m >> ENV config file not found. Please ensure it's in the repo and re-provision. << \033[0m"
             exit 1
@@ -46,18 +46,18 @@ if [ ! -e /www/repo/svr/cfg/cfg-$ENV.sh ]; then
         fi
     else
         # for first time repo setup, grab the env vars now
-        source /www/repo/svr/cfg/cfg-$ENV.sh
+        source /var/www/repo/svr/cfg/cfg-$ENV.sh
     fi
 fi
 
 # set up log files
-mkdir -p /www/logs
-touch /www/logs/gunicorn_supervisor.$ENV.log
-touch /www/logs/gunicorn.$ENV.log
-touch /www/logs/nginx-access.$ENV.log
-touch /www/logs/nginx-error.$ENV.log
-chown -R www-data:$USER /www/logs
-chmod -R 775 /www/logs
+mkdir -p /var/www/logs/$ENV
+touch /var/www/logs/$ENV/gunicorn_supervisor.log
+touch /var/www/logs/$ENV/gunicorn.log
+touch /var/www/logs/$ENV/nginx-access.log
+touch /var/www/logs/$ENV/nginx-error.log
+chown -R www-data:$USER /var/www/logs/$ENV
+chmod -R 775 /var/www/logs/$ENV
 
 
 # Postgres DB setup
@@ -70,19 +70,23 @@ if [ $ENV == 'dev' -o $ENV == 'test' ]; then
         sudo -u postgres psql -c "ALTER USER $DB_USER CREATEDB;"
 fi
 
+# Run a deployment so the code is in the right place
+chmod +x /var/www/repo/svr/cfg/server-deploy.sh
+/var/www/repo/svr/cfg/server-deploy.sh $ENV $USER
+
 # do the rest as the user we'll be logging in as through SSH
-chmod +x /www/repo/svr/cfg/server-setup-user.sh
-sudo -u $USER /www/repo/svr/cfg/server-setup-user.sh $ENV $USER
+chmod +x /var/www/repo/svr/cfg/server-setup-user.sh
+sudo -u $USER /var/www/repo/svr/cfg/server-setup-user.sh $ENV $USER
 
 # Set up supervisor conf to point to the one in this repo
 if [ ! -h /etc/supervisor/conf.d/gunicorn.$ENV.supervisor.conf ]; then
-    ln -s /www/$ENV/current/cfg/files/gunicorn.$ENV.supervisor.conf /etc/supervisor/conf.d/gunicorn.$ENV.supervisor.conf
+    ln -s /var/www/$ENV/current/cfg/files/gunicorn.$ENV.supervisor.conf /etc/supervisor/conf.d/gunicorn.$ENV.supervisor.conf
 fi
 
 # ...and the nginx configs
 if [ ! -e /etc/nginx/sites-enabled/default.nginx.conf ]; then
-    mv /www/$ENV/current/cfg/files/default.nginx.conf /etc/nginx/sites-enabled/
+    mv /var/www/$ENV/current/cfg/files/default.nginx.conf /etc/nginx/sites-enabled/
 fi
 if [ ! -h /etc/nginx/sites-enabled/dialectic.$ENV.nginx.conf ]; then
-    ln -s /www/$ENV/current/cfg/files/dialectic.$ENV.nginx.conf /etc/nginx/sites-enabled/dialectic.$ENV.nginx.conf
+    ln -s /var/www/$ENV/current/cfg/files/dialectic.$ENV.nginx.conf /etc/nginx/sites-enabled/dialectic.$ENV.nginx.conf
 fi

@@ -5,7 +5,7 @@ ENV="dev"                                           # Which environment this scr
 DJANGODIR=/www/$ENV/current/app                      # Django project directory
 USER=ubuntu                                         # the user to run as
 GROUP=ubuntu                                        # the group to run as
-SOCKFILE=/home/$USER/gunicorn.$ENV.sock              # we will communicte using this unix socket
+SOCKFILE=/home/$USER/$ENV.gunicorn.sock              # we will communicte using this unix socket
 NUM_WORKERS=3                                       # how many worker processes should Gunicorn spawn
 DJANGO_SETTINGS_MODULE=dialectic.settings           # which settings file should Django use
 DJANGO_WSGI_MODULE=dialectic.wsgi                   # WSGI module name
@@ -35,5 +35,5 @@ exec /home/ubuntu/.virtualenvs/dialectic-$ENV/bin/gunicorn ${DJANGO_WSGI_MODULE}
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
-  --log-file=/www/logs/gunicorn.$ENV.log \
+  --log-file=/www/logs/$ENV/gunicorn.log \
   --pid=/tmp/nginx.pid

@@ -6,7 +6,7 @@
 # Grab the environment var, default to 'dev'
 ENV=${1-dev}
 # ... and pick up related vars
-source /www/repo/svr/cfg/cfg-$ENV.sh
+source /var/www/repo/svr/cfg/cfg-$ENV.sh
 
 # Grab the user var, default to 'vagrant'
 USER=${2-vagrant}
@@ -38,11 +38,11 @@ export PIP_VIRTUALENV_BASE=/home/$USER/.virtualenvs
 mkvirtualenv dialectic-$ENV
 workon dialectic-$ENV
 
-if [ ! -f /www/$ENV/current/app/dialectic/settings/local.py ]; then
+if [ ! -f /var/www/$ENV/current/app/dialectic/settings/local.py ]; then
     # Set up local Django settings
     #
     # NB THIS WILL OVERWRITE ANY EXISTING local.py SETTINGS FILE
     #
-    echo "from .$ENV import *" > /www/$ENV/current/app/dialectic/settings/local.py
-    echo "DATABASES = { 'default': { 'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': '$DB_NAME', 'USER': '$DB_USER', 'PASSWORD': '$DB_PASS', 'HOST': '127.0.0.1', 'PORT': '5432', }}" >> /www/$ENV/current/app/dialectic/settings/local.py
+    echo "from .$ENV import *" > /var/www/$ENV/current/app/dialectic/settings/local.py
+    echo "DATABASES = { 'default': { 'ENGINE': 'django.db.backends.postgresql_psycopg2', 'NAME': '$DB_NAME', 'USER': '$DB_USER', 'PASSWORD': '$DB_PASS', 'HOST': '127.0.0.1', 'PORT': '5432', }}" >> /var/www/$ENV/current/app/dialectic/settings/local.py
 fi
