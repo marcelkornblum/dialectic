@@ -32,9 +32,7 @@ pip install virtualenv virtualenvwrapper
 mkdir -p /var/www/$ENV
 chown -R $USER:$USER /var/www
 if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
-    if [ -d /var/www/repo ]; then
-        su - $USER -c "git -C /var/www/repo pull"
-    else
+    if [ ! -d /var/www/repo ]; then
         su - $USER -c "git clone https://github.com/marcelkornblum/dialectic.git /var/www/repo"
     fi
     if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
@@ -48,6 +46,7 @@ if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
         # for first time repo setup, grab the env vars now
         source /var/www/repo/svr/cfg/cfg-$ENV.sh
     fi
+    su - $USER -c "git -C /var/www/repo pull origin/$GIT_BRANCH"
 fi
 
 # set up log files
