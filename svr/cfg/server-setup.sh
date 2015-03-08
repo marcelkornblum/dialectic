@@ -46,7 +46,7 @@ if [ ! -e /var/www/repo/svr/cfg/cfg-$ENV.sh ]; then
         # for first time repo setup, grab the env vars now
         source /var/www/repo/svr/cfg/cfg-$ENV.sh
     fi
-    su - $USER -c "git -C /var/www/repo pull origin/$GIT_BRANCH"
+    su - $USER -c "git -C /var/www/repo pull origin $GIT_BRANCH"
 fi
 
 # set up log files
