@@ -34,11 +34,12 @@ First of all, you need some local dev settings to use. Save a copy of the `svr/c
 Once this is done, on the command line, navigate to the `svr` directory and start the Vagrant instance, then log into the instance to run the application. Simply paste the following commands into your terminal to get going:
 
 - `cd svr` (assuming you're starting in the repo root folder)
+- copy the `/svr/cfg/cfg-tpl.sh` to `/svr/cfg/cfg-local.sh`, changing any of the values in that file.
 - `vagrant up` (this will download the `trusty` image and then run the shell provisioning script. The first time you run this it will take some time and use several GB of space on your hard drive, as well as bandwidth)
 - `vagrant ssh` (this will log you into the guest machine)
 - `fab update` (this will ensure the server-side requirements are up-to-date on the vagrant instance. You should do this each time you pull from a remote repository.)
 - `fab importdb` (this will load up a development database into your local instance. You can do this any time you want to 'start fresh' with a clean database)
-- `fab app` (this will start the server in development mode)
+- `fab app` (this will start the server in local development mode)
 
 The first time it starts, vagrant will download the basic image with the guest operating system (Ubuntu), and then provision the instance with all the required software, tools and configuration.
 

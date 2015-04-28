@@ -19,11 +19,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     local.vm.network "forwarded_port", guest: 80, host: 8989
 
     local.vm.provision "shell",
-      path:"./cfg/server-setup.sh", args: ["dev", "vagrant"]
+      path:"./cfg/server-setup.sh", args: ["local", "vagrant"]
 
     # VirtualBox Provider config
     local.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "512"]
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
   end
 

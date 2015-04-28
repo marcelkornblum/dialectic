@@ -229,5 +229,4 @@ INSTALLED_APPS = (
     'storages',
     'corsheaders',
 
-    'core',
 )
