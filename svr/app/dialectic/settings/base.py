@@ -311,18 +311,21 @@ JWT_AUTH = {
 #
 # Django Storages
 #
-# AWS_STATIC_BUCKET_NAME = ""
-# AWS_WEBSITE_BUCKET_NAME = ""
-# AWS_STATIC_CUSTOM_DOMAIN = AWS_STATIC_BUCKET_NAME
-# AWS_STORAGE_BUCKET_NAME = AWS_STATIC_BUCKET_NAME
-# STATIC_URL = "http://%s.s3-website-eu-west-1.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
-# MEDIA_URL = STATIC_URL + '/media/'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STATIC_BUCKET_NAME = ""
+AWS_WEBSITE_BUCKET_NAME = ""
+AWS_STATIC_CUSTOM_DOMAIN = "%s.s3-website-eu-west-1.amazonaws.com" % AWS_STATIC_BUCKET_NAME
+AWS_STORAGE_BUCKET_NAME = AWS_STATIC_BUCKET_NAME
+STATIC_URL = "http://%s/static/" % AWS_STATIC_CUSTOM_DOMAIN
+MEDIA_URL = "http://%s/media/" % AWS_STATIC_CUSTOM_DOMAIN
 
-# DEFAULT_FILE_STORAGE = 'dialectic.s3utils.MediaRootS3BotoStorage'
-# STATICFILES_STORAGE = 'dialectic.s3utils.StaticRootS3BotoStorage'
-# STATIC_ROOT = ''
+DEFAULT_FILE_STORAGE = 'dialectic.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'dialectic.s3utils.StaticRootS3BotoStorage'
+STATIC_ROOT = ''
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
+
 
 
 
