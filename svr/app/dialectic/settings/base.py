@@ -37,25 +37,6 @@ STATICFILES_FINDERS = (
 
 
 #
-# Django Storages settings
-#
-AWS_STATIC_BUCKET_NAME = ""
-AWS_WEBSITE_BUCKET_NAME = ""
-AWS_STATIC_CUSTOM_DOMAIN = AWS_STATIC_BUCKET_NAME
-AWS_STORAGE_BUCKET_NAME = AWS_STATIC_BUCKET_NAME
-STATIC_URL = "http://%s.s3-website-eu-west-1.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
-MEDIA_URL = STATIC_URL + '/media/'
-
-DEFAULT_FILE_STORAGE = 'dialectic.s3utils.MediaRootS3BotoStorage'
-STATICFILES_STORAGE = 'dialectic.s3utils.StaticRootS3BotoStorage'
-STATIC_ROOT = ''
-AWS_S3_SECURE_URLS = False
-AWS_QUERYSTRING_AUTH = False
-
-
-
-
-#
 # Security
 #
 DEBUG = False
@@ -226,7 +207,127 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'storages',
+    # 'storages',
     'corsheaders',
+    'rest_framework',
+    'userena',
+    'guardian',
+    'easy_thumbnails',
+    'userena.contrib.umessages',
+    'fluent_comments',
+    'crispy_forms',
+    'django_comments',
+    'django.contrib.sites',
 
+    'accounts', # proxy for userena
+    'policies',
 )
+
+
+
+
+#########################
+#                       #
+#  Third Party Configs  #
+#                       #
+#########################
+
+
+
+
+#
+# Django Rest Framework
+#
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'PAGE_SIZE': 10,
+}
+
+
+
+
+#
+# Userena Profiles, Django Guardian
+#
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+ANONYMOUS_USER_ID = -1
+
+AUTH_PROFILE_MODULE = 'accounts.Citizen'
+USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
+
+
+
+#
+# JWT Auth
+#
+JWT_AUTH = {
+    'JWT_ENCODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_encode_handler',
+
+    'JWT_DECODE_HANDLER':
+    'rest_framework_jwt.utils.jwt_decode_handler',
+
+    'JWT_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_payload_handler',
+
+    'JWT_PAYLOAD_GET_USER_ID_HANDLER':
+    'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
+
+    'JWT_RESPONSE_PAYLOAD_HANDLER':
+    'rest_framework_jwt.utils.jwt_response_payload_handler',
+
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_ALGORITHM': 'HS256',
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_AUDIENCE': None,
+    'JWT_ISSUER': None,
+
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+}
+
+
+
+
+#
+# Django Storages
+#
+# AWS_STATIC_BUCKET_NAME = ""
+# AWS_WEBSITE_BUCKET_NAME = ""
+# AWS_STATIC_CUSTOM_DOMAIN = AWS_STATIC_BUCKET_NAME
+# AWS_STORAGE_BUCKET_NAME = AWS_STATIC_BUCKET_NAME
+# STATIC_URL = "http://%s.s3-website-eu-west-1.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+# MEDIA_URL = STATIC_URL + '/media/'
+
+# DEFAULT_FILE_STORAGE = 'dialectic.s3utils.MediaRootS3BotoStorage'
+# STATICFILES_STORAGE = 'dialectic.s3utils.StaticRootS3BotoStorage'
+# STATIC_ROOT = ''
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+
+
+
+
+#
+# Fluent Comments
+#
+COMMENTS_APP = 'fluent_comments'

@@ -47,7 +47,7 @@ Your server-side environment should have been fully created and configured by th
 
 Once you've logged in to the machine via SSH, you should be able to use [Fabric](http://www.fabfile.org/) commands to do most of the admin tasks you may require.
 
-Running `fab update` will do a `pip install` of the relevant requirements files (`svr/cfg/requirements/base.txt` plus the relevant one for your environment), then run the Django `collectstatic`, `syncdb` and `migrate` commands.
+Running `fab update` will do a `pip install` of the relevant requirements files (`svr/cfg/requirements/base.txt` plus the relevant one for your environment), then run the Django `collectstatic` and `migrate` commands.
 
 `fab importdb` runs a script that grabs the latest version of the development database and imports it into your vagrant instance's database server. By default this will load the development dataset; other datasets are available through the `fab importdb:db=staging` argument syntax.
 

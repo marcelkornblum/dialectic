@@ -9,6 +9,8 @@ def update(*args):
     """
     local("pip install -r ../cfg/pip_requirements/base.txt")
     local("pip install -r ../cfg/pip_requirements/dev.txt")
+    # local("python manage.py collectstatic")
+    local("python manage.py migrate")
 
 def importdb(*args):
     """

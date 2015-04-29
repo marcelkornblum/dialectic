@@ -1,7 +1,7 @@
 #!/bin/bash
 # Server Setup
 #
-# Script to install all the requirements for the server-side part of the dialectic project
+# Script to install all the requirements for the server-side part of the dialectic project. Run as root.
 
 
 # Grab the environment var, default to 'local'
@@ -16,8 +16,21 @@ echo -e "\033[0;34m > Provisioning Vagrant server, with the following parameters
 echo -e "\033[0;34m > Environment: $ENV\033[0m"
 echo -e "\033[0;34m > Main User:   $USER\033[0m"
 
-# Housekeeping
+# ElasticSearch and Java
+add-apt-repository ppa:webupd8team/java -y
+wget -q https://packages.elasticsearch.org/GPG-KEY-elasticsearch -O- | sudo apt-key add -
+echo "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
 apt-get update
+# the installer asks for input, which we want to suppress. Luckily someone figured out how...
+# http://askubuntu.com/questions/190582/installing-java-automatically-with-silent-option
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+apt-get install oracle-java7-installer -y
+apt-get install elasticsearch -y
+update-rc.d elasticsearch defaults 95 10
+service elasticsearch start
+
+# Housekeeping
 apt-get install -y git vim
 
 # Web Servers
