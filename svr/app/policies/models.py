@@ -4,6 +4,8 @@ from django.db import models
 
 from django_fsm import FSMField, transition
 
+from voting.mixins import VoteMixin
+
 
 class TopicQuerySet(models.query.QuerySet):
     """Custom queryset for Topic models."""
@@ -117,7 +119,7 @@ class PolicyManager(models.Manager):
 
 
 @reversion.register
-class Policy(models.Model):
+class Policy(VoteMixin):
     """
     The outcome of a debate on a Topic, a Policy is a voted-for guide to action
     regarding the specified Topic
@@ -178,3 +180,36 @@ class Policy(models.Model):
             self.topic.close()
 
         return self
+
+
+class EvidenceQuerySet(models.query.QuerySet):
+    """Custom queryset for Evidence models."""
+
+    def for_topic(self, topic):
+        return self.filter(topic=topic)
+
+
+class EvidenceManager(models.Manager):
+
+    def get_queryset(self):
+        "Bind the manager to the custom queryset class."
+        return EvidenceQuerySet(self.model, using=self._db)
+
+    def for_topic(self, topic):
+        "Return evidence for thje given Topic."
+        return self.get_queryset().for_topic(topic)
+
+
+class Evidence(models.Model):
+    topic = models.ForeignKey(Topic, related_name='evidence')
+    name = models.CharField(max_length=200)
+    file = models.FileField(blank=True, null=True)
+    url = models.URLField(blank=True, null=True)
+
+    objects = EvidenceManager()
+
+    class Meta:
+        verbose_name_plural = "evidence"
+
+    def __unicode__(self):
+        return u'%s' % self.name

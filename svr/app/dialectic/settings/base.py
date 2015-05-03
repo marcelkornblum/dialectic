@@ -211,6 +211,7 @@ INSTALLED_APPS = (
     'reversion',
     'storages',
     'corsheaders',
+    'genericm2m',
     # 'rest_framework',
     'userena',
     'guardian',
@@ -223,6 +224,7 @@ INSTALLED_APPS = (
 
     'accounts', # proxy for userena
     'policies',
+    'voting',
 )
 
 
