@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load comments %}
+
+{% block content %}
+<h1>{{ topic.name }}</h1>
+<h2>Open policies</h2>
+<ul>
+{% for policy in policies %}
+    <li>{{ policy.name }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

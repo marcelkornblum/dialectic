@@ -206,18 +206,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-    # 'storages',
+    'reversion',
+    'storages',
     'corsheaders',
-    'rest_framework',
+    # 'rest_framework',
     'userena',
     'guardian',
     'easy_thumbnails',
     'userena.contrib.umessages',
     'fluent_comments',
-    'crispy_forms',
+    # 'threadedcomments',
     'django_comments',
-    'django.contrib.sites',
+    'crispy_forms',
 
     'accounts', # proxy for userena
     'policies',
@@ -235,20 +237,7 @@ INSTALLED_APPS = (
 
 
 
-#
-# Django Rest Framework
-#
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
-    'PAGE_SIZE': 10,
-}
+SITE_ID = 1
 
 
 
@@ -267,6 +256,24 @@ AUTH_PROFILE_MODULE = 'accounts.Citizen'
 USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
+
+
+
+
+#
+# Django Rest Framework
+#
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'PAGE_SIZE': 10,
+}
 
 
 

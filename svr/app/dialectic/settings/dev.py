@@ -62,4 +62,6 @@ if DEBUG:
 
 
 
-
+# Set up nose as the testrunner
+INSTALLED_APPS += ('django_nose',)
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

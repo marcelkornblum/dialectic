@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load comments %}
+
+{% block content %}
+<h1>Open topics</h1>
+<ul>
+{% for topic in open_topics %}
+    <li><a href="{% url 'topic_detail' topic.pk %}">{{ topic.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
