@@ -1,11 +1,11 @@
 <div class="vote-widget">
     <div class="vote vote--up{% if existing_upvote %} already-voted{% endif %}">
-        <a href="{% url 'voting_voteup' app_name model_name object_id %}?next={{ path|urlencode }}">Vote Up</a>
+        <a href="{% url 'voting_voteup' app_name model_name object_id %}?next={{ path|urlencode }}">{{ upvote_label }}</a>
     </div>
     <div class="display-votes">
         {{ votes }}
     </div>
     <div class="vote vote--down{% if existing_downvote %} already-voted{% endif %}">
-        <a href="{% url 'voting_votedown' app_name model_name object_id %}?next={{ path|urlencode }}">Vote Down</a>
+        <a href="{% url 'voting_votedown' app_name model_name object_id %}?next={{ path|urlencode }}">{{ downvote_label }}</a>
     </div>
 </div>

@@ -165,6 +165,17 @@ class Policy(VoteMixin):
     def siblings(self):
         return self.topic.policies.exclude(pk=self.pk)
 
+    @property
+    def evidence(self):
+        evidence = self.topic.evidence.all()
+        attached_evidence = []
+        for ev_p in self.supporting_evidence.all():
+            attached_evidence.append(ev_p.evidence)
+        for item in evidence:
+            if item not in attached_evidence:
+                EvidencePolicySupport.objects.create(policy=self, evidence=item)
+        return self.supporting_evidence.all()
+
     def save(self, *args, **kwargs):
         if self.pro is None:
             pro = PolicyArgument.objects.create()
@@ -231,6 +242,9 @@ class EvidenceQuerySet(models.query.QuerySet):
     def for_topic(self, topic):
         return self.filter(topic=topic)
 
+    def valid(self):
+        return self.filter(votes__is_upvote=True)
+
 
 class EvidenceManager(models.Manager):
 
@@ -239,8 +253,11 @@ class EvidenceManager(models.Manager):
         return EvidenceQuerySet(self.model, using=self._db)
 
     def for_topic(self, topic):
-        "Return evidence for thje given Topic."
+        "Return evidence for the given Topic."
         return self.get_queryset().for_topic(topic)
+
+    def valid(self):
+        return self.get_queryset().valid()
 
 
 class Evidence(VoteMixin):

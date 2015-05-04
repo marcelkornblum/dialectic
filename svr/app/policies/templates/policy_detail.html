@@ -4,21 +4,29 @@
 {% block content %}
 <a href="{% url 'policies_topic_detail' policy.topic.pk %}">Topic: {{ policy.topic.name }}</a>
 
-<h1>{{ policy.name }}</h1>{% vote_widget policy %}
+<h1>{{ policy.name }}</h1>{% vote_widget policy "Vote For" "Vote Against" %}
 <h2>Summary</h2>
 <p>{{ policy.summary }}</p>
 <h2>Description</h2>
 <p>{{ policy.description }}</p>
 <h2>Evidence supporting this policy</h2>
-<p>{{ policy.description }}</p>
+<ul>
+{% for item in policy.evidence %}
+    <li>
+        {% if item.evidence.url %}
+            <a href="{{ item.evidence.url }}" target="_blank">{{ item.evidence.name | default:item.evidence.url }}</a>
+        {% elif item.evidence.file %}
+            <a href="{{ item.evidence.file.url }}" target="_blank">Download File</a>
+        {% endif %}
+    {% vote_widget item.evidence "Valid Evidence" "Invalid Evidence" %}
+    {% vote_widget item "Supports this policy" "Does not support this policy" %}</li>
+{% endfor %}
+    <li><a href="{% url 'policies_evidence_add' topic.pk %}">Add new</a></li>
+</ul>
 
-<h3>Pro</h3>
-{% render_comment_list for policy.pro %}
-{% render_comment_form for policy.pro %}
-
-<h3>Con</h3>
-{% render_comment_list for policy.con %}
-{% render_comment_form for policy.con %}
+<h3>Comments</h3>
+{% render_comment_list for policy %}
+{% render_comment_form for policy %}
 
 <h1>Alternative policies in this topic</h1>
 <ul>
