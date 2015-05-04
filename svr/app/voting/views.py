@@ -13,7 +13,7 @@ def voteup(request, app_name, model_name, object_id):
     if vote.is_upvote is True:
         messages.info(request, "Your upvote has been registered")
     else:
-        messages.warn(request, "Your previous vote has been cancelled")
+        messages.warning(request, "Your previous vote has been cancelled")
     return redirect(_get_redirect_location(request))
 
 @login_required
@@ -26,7 +26,7 @@ def votedown(request, app_name, model_name, object_id):
     if vote.is_upvote is False:
         messages.info(request, "Your downvote has been registered")
     else:
-        messages.warn(request, "Your previous vote has been cancelled")
+        messages.warning(request, "Your previous vote has been cancelled")
     return redirect(_get_redirect_location(request))
 
 def _get_instance(app_name, model_name, object_id):

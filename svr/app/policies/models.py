@@ -220,7 +220,8 @@ class EvidenceManager(models.Manager):
 
 class Evidence(VoteMixin):
     topic = models.ForeignKey(Topic, related_name='evidence')
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, blank=True, default="")
+    attribution = models.CharField(max_length=200, blank=True, default="")
     summary = models.TextField(blank=True, default="")
     description = models.TextField(blank=True, default="")
     file = models.FileField(blank=True, null=True)

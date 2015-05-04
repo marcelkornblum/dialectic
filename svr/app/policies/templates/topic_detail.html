@@ -8,12 +8,13 @@
 {% for item in evidence %}
     <li>
         {% if item.url %}
-            <a href="{{ item.url }}" target="_blank">{{ item.name | default:'View' }}</a>
-        {% else %}
+            <a href="{{ item.url }}" target="_blank">{{ item.name | default:item.url }}</a>
+        {% elif item.file %}
             <a href="{{ item.file.url }}" target="_blank">Download File</a>
         {% endif %}
-     ({{ item.votes.count }})</li>
+     {% vote_widget item %}</li>
 {% endfor %}
+    <li><a href="{% url 'policies_evidence_add' topic.pk %}">Add new</a></li>
 </ul>
 
 <h2>Policy options</h2>
@@ -21,5 +22,6 @@
 {% for policy in policies %}
     <li><a href="{% url 'policies_policy_detail' policy.pk %}">{{ policy.name }}</a> {% vote_widget policy %}</li>
 {% endfor %}
+    <li><a href="{% url 'policies_policy_add' topic.pk %}">Add new</a></li>
 </ul>
 {% endblock %}
