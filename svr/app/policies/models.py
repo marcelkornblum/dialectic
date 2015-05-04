@@ -40,7 +40,7 @@ class TopicManager(models.Manager):
 
 
 @reversion.register
-class Topic(models.Model):
+class Topic(VoteMixin):
     """
     A general topic for debate. Each topic should result in a policy after
     debate, or in a choice of policies during debate.
@@ -51,9 +51,17 @@ class Topic(models.Model):
     Closed: debate finished, no voting allowed
     """
     name = models.CharField(max_length=200)
+    summary = models.TextField(blank=True, default="")
+    description = models.TextField(blank=True, default="")
     state = FSMField(default='draft')
 
     objects = TopicManager()
+
+    class Meta:
+        permissions = (
+            ('can_vote_up', 'Upvote Topic'),
+            ('can_vote_down', 'Downvote Topic'),
+        )
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -66,7 +74,7 @@ class Topic(models.Model):
         """
         Expects a single Policy to be returned; will error otherwise
         """
-        return self.policies.get(selected=True)
+        return self.policies.get(is_selected=True)
 
     @transition(field=state, source=['draft', 'closed'], target='open')
     def open(self):
@@ -81,7 +89,7 @@ class Topic(models.Model):
         Changes state of the Topic and each of its Policies to 'closed', but
         only if a single policy is selected
         """
-        assert(self.policies.filter(selected=True).count() == 1)
+        assert(self.policies.filter(is_selected=True).count() == 1)
         for policy in self.policies:
             policies.close()
 
@@ -131,19 +139,30 @@ class Policy(VoteMixin):
     """
     topic = models.ForeignKey(Topic, related_name='policies')
     name = models.CharField(max_length=200)
+    summary = models.TextField(blank=True, default="")
+    description = models.TextField(blank=True, default="")
     state = FSMField(default='draft')
-    selected = models.BooleanField(default=False)
+    is_selected = models.BooleanField(default=False)
 
     objects = PolicyManager()
 
     class Meta:
         verbose_name_plural = 'policies'
+        permissions = (
+            ('can_vote_up', 'Upvote Policy'),
+            ('can_vote_down', 'Downvote Policy'),
+        )
 
     def __unicode__(self):
         return u'%s' % self.name
 
     def __repr__(self):
         return u'<policies.Policy #%i: %s>' % (self.pk, self.name)
+
+    @property
+    def siblings(self):
+        return self.topic.policies.exclude(pk=self.pk)
+
 
     @transition(field=state, source=['draft', 'closed'], target='open')
     def open(self):
@@ -166,12 +185,11 @@ class Policy(VoteMixin):
         `close` the parent Topic and all sibling Policies, unless `close_topic`
         is set to False
         """
-        siblings = self.topic.policies.exclude(pk=self.pk)
         if force is True:
-            siblings.update(selected=False)
-        assert(siblings.filter(selected=True).count() == 0)
+            self.siblings.update(is_selected=False)
+        assert(self.siblings.filter(is_selected=True).count() == 0)
 
-        self.selected = True
+        self.is_selected = True
 
         if save is True:
             self.save()
@@ -200,9 +218,11 @@ class EvidenceManager(models.Manager):
         return self.get_queryset().for_topic(topic)
 
 
-class Evidence(models.Model):
+class Evidence(VoteMixin):
     topic = models.ForeignKey(Topic, related_name='evidence')
     name = models.CharField(max_length=200)
+    summary = models.TextField(blank=True, default="")
+    description = models.TextField(blank=True, default="")
     file = models.FileField(blank=True, null=True)
     url = models.URLField(blank=True, null=True)
 
@@ -210,6 +230,10 @@ class Evidence(models.Model):
 
     class Meta:
         verbose_name_plural = "evidence"
+        permissions = (
+            ('can_vote_up', 'Upvote Evidence'),
+            ('can_vote_down', 'Downvote Evidence'),
+        )
 
     def __unicode__(self):
         return u'%s' % self.name

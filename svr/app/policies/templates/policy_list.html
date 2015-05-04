@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load comments voting %}
+
+{% block content %}
+<h1>Open policies</h1>
+<ul>
+{% for policy in open_policies %}
+    <li>[<a href="{% url 'policies_topic_detail' policy.topic.pk %}">{{ policy.topic.name }}</a>]: <a href="{% url 'policies_policy_detail' policy.pk %}">{{ policy.name }}</a> {% vote_widget policy %}</li>
+{% endfor %}
+</ul>
+<h1>Closed policies</h1>
+<ul>
+{% for policy in closed_policies %}
+    <li><a href="{% url 'policies_policy_detail' policy.pk %}">{{ policy.name }}</a> ({{ policy.vote_count }})({{ policy.is_selected }})</li>
+{% endfor %}
+</ul>
+{% endblock %}

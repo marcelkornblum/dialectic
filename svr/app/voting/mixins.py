@@ -18,6 +18,18 @@ class VoteMixin(models.Model):
     class Meta:
         abstract = True
 
+    @property
+    def upvotes(self):
+        return self.votes.filter(is_upvote=True)
+
+    @property
+    def downvotes(self):
+        return self.votes.filter(is_upvote=False)
+
+    @property
+    def vote_count(self):
+        return self.upvotes.count() - self.downvotes.count()
+
     def voteup(self, user):
         return self._create_or_toggle_vote(user, True)
 
@@ -41,7 +53,8 @@ class VoteMixin(models.Model):
                 existing_vote.is_upvote = upvote
             else:
                 existing_vote.is_upvote = None
-            return existing_vote.save()
+            existing_vote.save()
+            return existing_vote
 
     def _create_vote(self, user, upvote):
         return self.votes.connect(user, is_upvote=upvote)
@@ -56,6 +69,18 @@ class VoterMixin(models.Model):
     def votes(self):
         user_type = ContentType.objects.get(app_label="auth", model="user")
         return Vote.objects.filter(object_id=self.user.pk, object_type=user_type)
+
+    @property
+    def upvotes(self):
+        return self.votes.filter(is_upvote=True)
+
+    @property
+    def downvotes(self):
+        return self.votes.filter(is_upvote=False)
+
+    @property
+    def vote_count(self):
+        return self.upvotes.count() - self.downvotes.count()
 
     @property
     def votes_today(self, include_cancelled=False):

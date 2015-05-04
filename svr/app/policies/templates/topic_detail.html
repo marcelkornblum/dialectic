@@ -1,12 +1,25 @@
 {% extends "base.html" %}
-{% load comments %}
+{% load comments voting %}
 
 {% block content %}
 <h1>{{ topic.name }}</h1>
-<h2>Open policies</h2>
+<h2>Evidence</h2>
+<ul>
+{% for item in evidence %}
+    <li>
+        {% if item.url %}
+            <a href="{{ item.url }}" target="_blank">{{ item.name | default:'View' }}</a>
+        {% else %}
+            <a href="{{ item.file.url }}" target="_blank">Download File</a>
+        {% endif %}
+     ({{ item.votes.count }})</li>
+{% endfor %}
+</ul>
+
+<h2>Policy options</h2>
 <ul>
 {% for policy in policies %}
-    <li>{{ policy.name }}</li>
+    <li><a href="{% url 'policies_policy_detail' policy.pk %}">{{ policy.name }}</a> {% vote_widget policy %}</li>
 {% endfor %}
 </ul>
 {% endblock %}

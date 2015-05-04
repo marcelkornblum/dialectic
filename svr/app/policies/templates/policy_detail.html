@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load comments voting %}
+
+{% block content %}
+<h1>{{ policy.name }}</h1>
+<a href="{% url 'policies_topic_detail' policy.topic.pk %}">Topic: {{ policy.topic.name }}</a>
+
+<h1>Alternative policies in this topic</h1>
+<ul>
+{% for sibling in policy.siblings %}
+    <li><a href="{% url 'policies_policy_detail' sibling.pk %}">{{ sibling.name }}</a> {% vote_widget sibling %}</li>
+{% endfor %}
+</ul>
+{% endblock %}

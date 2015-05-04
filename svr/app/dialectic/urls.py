@@ -4,6 +4,7 @@ from django.contrib import admin
 urlpatterns = patterns('',
     url(r'^accounts/', include('userena.urls')),
     url(r'^policies/', include('policies.urls')),
+    url(r'^vote/', include('voting.urls')),
     url(r'^$', 'dialectic.views.home', name='home'),
 
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
