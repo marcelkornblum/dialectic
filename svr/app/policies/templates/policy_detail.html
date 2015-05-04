@@ -9,7 +9,16 @@
 <p>{{ policy.summary }}</p>
 <h2>Description</h2>
 <p>{{ policy.description }}</p>
+<h2>Evidence supporting this policy</h2>
+<p>{{ policy.description }}</p>
 
+<h3>Pro</h3>
+{% render_comment_list for policy.pro %}
+{% render_comment_form for policy.pro %}
+
+<h3>Con</h3>
+{% render_comment_list for policy.con %}
+{% render_comment_form for policy.con %}
 
 <h1>Alternative policies in this topic</h1>
 <ul>

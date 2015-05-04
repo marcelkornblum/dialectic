@@ -142,8 +142,8 @@ class Policy(VoteMixin):
     summary = models.TextField(blank=True, default="")
     description = models.TextField(blank=True, default="")
     is_selected = models.BooleanField(default=False)
-    pro_object = models.OneToOneField('PolicyArgument', related_name='policy_pro', null=True, blank=True)
-    con_object = models.OneToOneField('PolicyArgument', related_name='policy_con', null=True, blank=True)
+    pro = models.ForeignKey('PolicyArgument', related_name='policy_pro', null=True, blank=True)
+    con = models.ForeignKey('PolicyArgument', related_name='policy_con', null=True, blank=True)
     state = FSMField(default='draft')
 
     objects = PolicyManager()
@@ -165,19 +165,13 @@ class Policy(VoteMixin):
     def siblings(self):
         return self.topic.policies.exclude(pk=self.pk)
 
-    @property
-    def pro(self):
-        if self.pro_object is None:
-            self.pro_object = PolicyArgument()
-        return self.pro_object
-
-    @property
-    def con(self):
-        if self.con_object is None:
-            self.con_object = PolicyArgument()
-        return self.con_object
-
     def save(self, *args, **kwargs):
+        if self.pro is None:
+            pro = PolicyArgument.objects.create()
+            self.pro = pro
+        if self.con is None:
+            con = PolicyArgument.objects.create()
+            self.con = con
         return super(Policy, self).save()
 
     @transition(field=state, source=['draft', 'closed'], target='open')
@@ -221,7 +215,14 @@ class PolicyArgument(models.Model):
     This is a helper class that does precious little itself, but allows e.g.
     comments to attach to a specific 'pro-' or 'con-' side of a policy.
     """
-    pass
+
+    @property
+    def is_pro(self):
+        return self.policy_pro.count() > 0
+
+    @property
+    def is_con(self):
+        return self.policy_con.count() > 0
 
 
 class EvidenceQuerySet(models.query.QuerySet):
@@ -262,3 +263,8 @@ class Evidence(VoteMixin):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+
+class EvidencePolicySupport(VoteMixin):
+    evidence = models.ForeignKey(Evidence, related_name='supported_policies')
+    policy = models.ForeignKey(Policy, related_name='supporting_evidence')
