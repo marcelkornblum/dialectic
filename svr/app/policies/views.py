@@ -39,7 +39,9 @@ def policy_list(request):
 
 def policy_detail(request, policy_id):
     policy = get_object_or_404(Policy, pk=policy_id)
+    topic = policy.topic
     return render(request, 'policy_detail.html', {
+            'topic': topic,
             'policy': policy,
         }
     )
@@ -58,6 +60,7 @@ def policy_add(request, topic_id):
     else:
         form = PolicyForm(initial={'topic': topic})
     return render(request, 'policy_add.html', {
+            'topic': topic,
             'form': form,
         }
     )
@@ -76,6 +79,7 @@ def evidence_add(request, topic_id):
     else:
         form = EvidenceForm(initial={'topic': topic})
     return render(request, 'evidence_add.html', {
+            'topic': topic,
             'form': form,
         }
     )

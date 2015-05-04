@@ -1,6 +1,8 @@
+{% load staticfiles %}
 <html>
 <head>
 <title>{% block html_title %}Dialectic{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% static 'fluent_comments/css/ajaxcomments.css' %}" />
 </head>
 <body>
     {% if messages %}
@@ -13,6 +15,7 @@
     {% block content %}
     Welcome to dialectic.
     {% endblock %}
-    <script type="text/javascript" src="{{ STATIC_URL }}fluent_comments/js/ajaxcomments.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="{% static 'fluent_comments/js/ajaxcomments.js' %}"></script>
 </body>
 </html>

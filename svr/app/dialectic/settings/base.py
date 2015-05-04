@@ -101,6 +101,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'django.core.context_processors.static',
 )
 
 
@@ -343,4 +344,5 @@ AWS_QUERYSTRING_AUTH = False
 #
 # Fluent Comments
 #
+FLUENT_COMMENTS_EXCLUDE_FIELDS = ('name', 'email', 'url')
 COMMENTS_APP = 'fluent_comments'

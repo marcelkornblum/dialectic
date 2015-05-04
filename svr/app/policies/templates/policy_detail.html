@@ -2,8 +2,14 @@
 {% load comments voting %}
 
 {% block content %}
-<h1>{{ policy.name }}</h1>
 <a href="{% url 'policies_topic_detail' policy.topic.pk %}">Topic: {{ policy.topic.name }}</a>
+
+<h1>{{ policy.name }}</h1>{% vote_widget policy %}
+<h2>Summary</h2>
+<p>{{ policy.summary }}</p>
+<h2>Description</h2>
+<p>{{ policy.description }}</p>
+
 
 <h1>Alternative policies in this topic</h1>
 <ul>

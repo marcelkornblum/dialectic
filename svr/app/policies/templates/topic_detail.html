@@ -3,6 +3,10 @@
 
 {% block content %}
 <h1>{{ topic.name }}</h1>
+<h2>Summary</h2>
+<p>{{ topic.summary }}</p>
+<h2>Description</h2>
+<p>{{ topic.description }}</p>
 <h2>Evidence</h2>
 <ul>
 {% for item in evidence %}
@@ -24,4 +28,8 @@
 {% endfor %}
     <li><a href="{% url 'policies_policy_add' topic.pk %}">Add new</a></li>
 </ul>
+
+<h2>Comments</h2>
+{% render_comment_list for topic %}
+{% render_comment_form for topic %}
 {% endblock %}

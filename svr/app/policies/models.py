@@ -141,8 +141,10 @@ class Policy(VoteMixin):
     name = models.CharField(max_length=200)
     summary = models.TextField(blank=True, default="")
     description = models.TextField(blank=True, default="")
-    state = FSMField(default='draft')
     is_selected = models.BooleanField(default=False)
+    pro_object = models.OneToOneField('PolicyArgument', related_name='policy_pro', null=True, blank=True)
+    con_object = models.OneToOneField('PolicyArgument', related_name='policy_con', null=True, blank=True)
+    state = FSMField(default='draft')
 
     objects = PolicyManager()
 
@@ -163,6 +165,20 @@ class Policy(VoteMixin):
     def siblings(self):
         return self.topic.policies.exclude(pk=self.pk)
 
+    @property
+    def pro(self):
+        if self.pro_object is None:
+            self.pro_object = PolicyArgument()
+        return self.pro_object
+
+    @property
+    def con(self):
+        if self.con_object is None:
+            self.con_object = PolicyArgument()
+        return self.con_object
+
+    def save(self, *args, **kwargs):
+        return super(Policy, self).save()
 
     @transition(field=state, source=['draft', 'closed'], target='open')
     def open(self):
@@ -198,6 +214,14 @@ class Policy(VoteMixin):
             self.topic.close()
 
         return self
+
+
+class PolicyArgument(models.Model):
+    """
+    This is a helper class that does precious little itself, but allows e.g.
+    comments to attach to a specific 'pro-' or 'con-' side of a policy.
+    """
+    pass
 
 
 class EvidenceQuerySet(models.query.QuerySet):
