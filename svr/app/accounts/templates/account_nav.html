@@ -1,0 +1,19 @@
+{% if user.is_authenticated %}
+    <li class="has-dropdown">
+        <a href="#">
+            <span class="nav-profile">
+                <img src="{{ user.citizen_profile.get_mugshot_url }}">
+            </span>
+            {{ user.username }}
+        </a>
+        <ul class="dropdown">
+            <li><a href="{% url 'userena_profile_detail' user.username %}">Profile</a></li>
+            <li><a href="{% url 'userena_profile_edit' user.username %}">Edit Profile</a></li>
+            <li><a href="{% url 'userena_profile_edit' user.username %}">Change Password</a></li>
+            <li><a href="{% url 'userena.views.signout' %}">Sign Out</a></li>
+        </ul>
+    </li>
+{% else %}
+    <li><a href="{% url 'userena.views.signup' %}">Sign Up</a></li>
+    <li><a href="{% url 'userena.views.signin' %}">Sign In</a></li>
+{% endif %}

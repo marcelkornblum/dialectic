@@ -16,7 +16,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Django runserver networking
     local.vm.network "forwarded_port", guest: 8888, host: 8888
-    local.vm.network "forwarded_port", guest: 80, host: 8989
+    local.vm.network "forwarded_port", guest: 8080, host: 8080
+
+    # Additional folder sharing
+    local.vm.synced_folder "../cli", "/client"
 
     local.vm.provision "shell",
       path:"./cfg/server-setup.sh", args: ["local", "vagrant"]

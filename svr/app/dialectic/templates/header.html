@@ -1,0 +1,62 @@
+{% load accounts %}
+<div class="fixed">
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="{% url 'home' %}">Dialectic</a></h1>
+            </li>
+            {# Mobile Menu #}
+            <li class="toggle-topbar menu-icon">
+                <a href="#">Menu</a>
+            </li>
+        </ul>
+        <section class="top-bar-section">
+            <ul class="left">
+                <li>
+                    <a href="{% url 'policies_topic_list' %}">Debates</a>
+                </li>
+            </ul>
+            <ul class="right">
+{% comment %}
+                <li class="has-form">
+                    <div class="row collapse">
+                        <div class="large-8 small-9 columns">
+                            <input type="text" placeholder="Find Stuff">
+                        </div>
+                        <div class="large-4 small-3 columns">
+                            <a href="#" class="alert button expand">Search</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="divider"></li>
+{% endcomment %}
+                {% account_nav %}
+            </ul>
+        </section>
+    </nav>
+</div>
+
+{% if breadcrumbs %}
+<ul class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+    {% for crumb in breadcrumbs %}
+
+    <li role="menuitem"{% if forloop.last %} class="current"{% endif %}>
+        {% if crumb.pk %}
+            <a href="{% url crumb.url_name crumb.pk %}">{{ crumb.label|safe }}</a>
+        {% else %}
+            <a href="{% url crumb.url_name %}">{{ crumb.label|safe }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if messages %}
+<div class="row">
+    <ul class="messages">
+        {% for message in messages %}
+        <li data-alert class="alert-box{% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -4,6 +4,11 @@ register = template.Library()
 
 @register.inclusion_tag('vote_widget.html', takes_context=True)
 def vote_widget(context, generic_object, upvote_label=None, downvote_label=None):
+    app_name = generic_object._meta.app_label
+    model_name = generic_object._meta.model_name
+    object_id = generic_object.pk
+    votes = generic_object.vote_count
+
     existing_upvote = False
     existing_downvote = False
     existing_user_vote = generic_object.get_vote_for_user(context['request'].user)
@@ -12,14 +17,12 @@ def vote_widget(context, generic_object, upvote_label=None, downvote_label=None)
             existing_upvote = True
         else:
             existing_downvote = True
+
     if upvote_label is None:
         upvote_label = 'Vote Up'
     if downvote_label is None:
         downvote_label = 'Vote Down'
-    app_name = generic_object._meta.app_label
-    model_name = generic_object._meta.model_name
-    object_id = generic_object.pk
-    votes = generic_object.vote_count
+
     return {
         'path': context['request'].path,
         'app_name': app_name,

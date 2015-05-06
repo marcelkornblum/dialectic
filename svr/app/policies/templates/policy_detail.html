@@ -11,7 +11,7 @@
 <p>{{ policy.description }}</p>
 <h2>Evidence supporting this policy</h2>
 <ul>
-{% for item in policy.evidence %}
+{% for item in supporting_evidence %}
     <li>
         {% if item.evidence.url %}
             <a href="{{ item.evidence.url }}" target="_blank">{{ item.evidence.name | default:item.evidence.url }}</a>

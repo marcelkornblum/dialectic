@@ -101,7 +101,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'django.core.context_processors.media',
     'django.core.context_processors.static',
+    'dialectic.context_processors.page_title',
+    # 'dialectic.context_processors.breadcrumbs'
 )
 
 
@@ -232,6 +235,11 @@ INSTALLED_APPS = (
 
 
 
+DEFAULT_PAGE_TITLE = 'Dialectic'
+
+
+
+
 #########################
 #                       #
 #  Third Party Configs  #
@@ -255,11 +263,24 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 ANONYMOUS_USER_ID = -1
-
-AUTH_PROFILE_MODULE = 'accounts.Citizen'
-USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
+AUTH_PROFILE_MODULE = 'accounts.Citizen'
+
+USERENA_SIGNIN_REDIRECT_URL = '/accounts/%(username)s/'
+USERENA_FORBIDDEN_USERNAMES = (
+    'signup',
+    'signout',
+    'signin',
+    'activate',
+    'me',
+    'password',
+    'dialectic',
+    'populace'
+)
+USERENA_MUGSHOT_GRAVATAR = True
+USERENA_DISABLE_PROFILE_LIST = True
+USERENA_HIDE_EMAIL = True
 
 
 

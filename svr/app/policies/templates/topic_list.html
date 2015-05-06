@@ -2,7 +2,7 @@
 {% load comments voting %}
 
 {% block content %}
-<h1>Open topics</h1>
+<h1>Topics under debate</h1>
 <ul>
 {% for topic in open_topics %}
     <li><a href="{% url 'policies_topic_detail' topic.pk %}">{{ topic.name }}</a> {% vote_widget topic %}</li>

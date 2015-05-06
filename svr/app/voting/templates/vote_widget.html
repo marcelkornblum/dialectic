@@ -2,7 +2,7 @@
     <div class="vote vote--up{% if existing_upvote %} already-voted{% endif %}">
         <a href="{% url 'voting_voteup' app_name model_name object_id %}?next={{ path|urlencode }}">{{ upvote_label }}</a>
     </div>
-    <div class="display-votes">
+    <div class="display-votes{% if votes > 0 %} positive{% elif votes < 0 %} negative{% endif %}">
         {{ votes }}
     </div>
     <div class="vote vote--down{% if existing_downvote %} already-voted{% endif %}">

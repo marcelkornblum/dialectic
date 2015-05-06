@@ -31,7 +31,7 @@ update-rc.d elasticsearch defaults 95 10
 service elasticsearch start
 
 # Housekeeping
-apt-get install -y git vim
+apt-get install -y git vim curl
 
 # Web Servers
 apt-get install -y nginx supervisor
@@ -99,6 +99,12 @@ else
     USER_SCRIPT=/vagrant/cfg/server-setup-user.sh
 fi
 
+# front end tools setup
+apt-get install -y ruby-full nodejs npm
+sudo ln -s "$(which nodejs)" /usr/bin/node
+npm install -g bower gulp
+gem install bundler foundation sass compass
+
 # do the rest as the user we'll be logging in as through SSH
 chmod +x $USER_SCRIPT
 sudo -u $USER $USER_SCRIPT $ENV $USER
@@ -116,4 +122,7 @@ if [ $ENV != 'local' ]; then
     if [ ! -h /etc/nginx/sites-enabled/dialectic.$ENV.nginx.conf ]; then
         ln -s /var/www/$ENV/current/cfg/files/dialectic.$ENV.nginx.conf /etc/nginx/sites-enabled/dialectic.$ENV.nginx.conf
     fi
+else
+    # link the FE folder to a place django can find it
+     ln -s /client /vagrant/app/dialectic/static/foundation
 fi

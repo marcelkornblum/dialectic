@@ -163,7 +163,7 @@ class Policy(VoteMixin):
 
     @property
     def siblings(self):
-        return self.topic.policies.exclude(pk=self.pk)
+        return sorted(self.topic.policies.exclude(pk=self.pk), key=lambda v: v.vote_count, reverse=True)
 
     @property
     def evidence(self):
@@ -174,7 +174,7 @@ class Policy(VoteMixin):
         for item in evidence:
             if item not in attached_evidence:
                 EvidencePolicySupport.objects.create(policy=self, evidence=item)
-        return self.supporting_evidence.all()
+        return sorted(self.supporting_evidence.all(), key=lambda v: v.vote_count, reverse=True)
 
     def save(self, *args, **kwargs):
         if self.pro is None:
