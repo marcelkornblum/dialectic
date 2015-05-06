@@ -1,0 +1,109 @@
+@import "settings";
+@import "foundation";
+
+// Or selectively include components
+// @import
+//   "foundation/components/accordion",
+//   "foundation/components/alert-boxes",
+//   "foundation/components/block-grid",
+//   "foundation/components/breadcrumbs",
+//   "foundation/components/button-groups",
+//   "foundation/components/buttons",
+//   "foundation/components/clearing",
+//   "foundation/components/dropdown",
+//   "foundation/components/dropdown-buttons",
+//   "foundation/components/flex-video",
+//   "foundation/components/forms",
+//   "foundation/components/grid",
+//   "foundation/components/inline-lists",
+//   "foundation/components/joyride",
+//   "foundation/components/keystrokes",
+//   "foundation/components/labels",
+//   "foundation/components/magellan",
+//   "foundation/components/orbit",
+//   "foundation/components/pagination",
+//   "foundation/components/panels",
+//   "foundation/components/pricing-tables",
+//   "foundation/components/progress-bars",
+//   "foundation/components/reveal",
+//   "foundation/components/side-nav",
+//   "foundation/components/split-buttons",
+//   "foundation/components/sub-nav",
+//   "foundation/components/switches",
+//   "foundation/components/tables",
+//   "foundation/components/tabs",
+//   "foundation/components/thumbs",
+//   "foundation/components/tooltips",
+//   "foundation/components/top-bar",
+//   "foundation/components/type",
+//   "foundation/components/offcanvas",
+//   "foundation/components/visibility";
+
+$positive-color: #43AC6A;
+$neutral-color: #008CBA;
+$negative-color: #f04124;
+
+body {
+    padding-top: 96px
+}
+
+.nav-profile {
+  @include thumb(
+    $border-width: 0,
+    $box-shadow: none,
+    $box-shadow-hover: none
+  );
+  img {
+    border-radius: 50%;
+    max-height: 37px;
+    max-width: 37px;
+    margin-bottom: 3px;
+    margin-right: 10px;
+  }
+}
+
+.messages {
+    margin: 0;
+    padding: 0;
+}
+
+.vote-widget {
+    display: inline-block;
+
+    .display-votes {
+        @include label();
+        @include label-style(false, $radius:1000px);
+
+        &.positive {
+            @include label-style($bg:$positive-color)
+        }
+        &.negative {
+            @include label-style($bg:$negative-color)
+        }
+    }
+    .vote {
+        a {
+            font-size: 0px;
+
+            &:before {
+                font-family: "foundation-icons";
+                font-size: 20px;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                text-decoration: inherit;
+            }
+        }
+        &.vote--up a {
+            &:before { content: "\f10c"; }
+        }
+        &.vote--down a {
+            &:before { content: "\f109"; }
+        }
+        &.already-voted a { color: $warning-color; }
+    }
+}
