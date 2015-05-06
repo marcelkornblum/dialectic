@@ -34,22 +34,23 @@
             </ul>
         </section>
     </nav>
+
+    {% if breadcrumbs %}
+    <ul class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
+        {% for crumb in breadcrumbs %}
+
+        <li role="menuitem"{% if forloop.last %} class="current"{% endif %}>
+            {% if crumb.pk %}
+                <a href="{% url crumb.url_name crumb.pk %}">{{ crumb.label|safe }}</a>
+            {% else %}
+                <a href="{% url crumb.url_name %}">{{ crumb.label|safe }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
 </div>
-
-{% if breadcrumbs %}
-<ul class="breadcrumbs" role="menubar" aria-label="breadcrumbs">
-    {% for crumb in breadcrumbs %}
-
-    <li role="menuitem"{% if forloop.last %} class="current"{% endif %}>
-        {% if crumb.pk %}
-            <a href="{% url crumb.url_name crumb.pk %}">{{ crumb.label|safe }}</a>
-        {% else %}
-            <a href="{% url crumb.url_name %}">{{ crumb.label|safe }}</a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
 
 {% if messages %}
 <div class="row">
