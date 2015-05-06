@@ -46,6 +46,8 @@ if [ $ENV != 'local' ]; then
 else
     echo "cd /vagrant/app" >> /home/$USER/.bashrc
     cp /vagrant/cfg/files/home/* /home/$USER
+    
+    wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 fi
 
 echo -e "\033[0;34m > Setting up virtualenv\033[0m"
