@@ -1,0 +1,1 @@
+-r cfg/pip_requirements/base.txt

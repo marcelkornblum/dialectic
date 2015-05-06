@@ -1,0 +1,2 @@
+# Basic Heroku setup
+web: gunicorn dialectic.wsgi --log-file -
