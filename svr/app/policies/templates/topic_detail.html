@@ -4,9 +4,9 @@
 {% block content %}
 <h1>{{ topic.name }}</h1>
 <h2>Summary</h2>
-<p>{{ topic.summary }}</p>
+<p>{{ topic.summary|linebreaks }}</p>
 <h2>Description</h2>
-<p>{{ topic.description }}</p>
+<p>{{ topic.description|linebreaks }}</p>
 <h2>Evidence</h2>
 <ul>
 {% for item in evidence %}

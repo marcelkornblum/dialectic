@@ -6,9 +6,9 @@
 
 <h1>{{ policy.name }}</h1>{% vote_widget policy "Vote For" "Vote Against" %}
 <h2>Summary</h2>
-<p>{{ policy.summary }}</p>
+<p>{{ policy.summary|linebreaks }}</p>
 <h2>Description</h2>
-<p>{{ policy.description }}</p>
+<p>{{ policy.description|linebreaks }}</p>
 <h2>Evidence supporting this policy</h2>
 <ul>
 {% for item in supporting_evidence %}
