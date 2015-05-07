@@ -42,7 +42,7 @@ easy_install pip
 pip install virtualenv virtualenvwrapper
 
 # App requirements
-apt-get install libncurses5-dev libffi-dev libssl-dev libjpeg-dev
+apt-get install -y libncurses5-dev libffi-dev libssl-dev libjpeg-dev
 
 # Ensure directory and repo in place
 mkdir -p /var/www/$ENV
