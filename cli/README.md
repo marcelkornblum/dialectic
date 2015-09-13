@@ -10,7 +10,7 @@ The aim will be to keep all software and libraries up to date as far as possible
 
 # Framework
 
-To start with, we will be using AngularJS, along with several helper libraries (detailed on the [Credits](../docs/CREDITS.md) page). We may also use [Bootstrap](http://getbootstrap.com) and/or [Polymer](https://www.polymer-project.org/).
+To start with, we will be using React, along with several helper libraries (detailed on the [Credits](../docs/CREDITS.md) page).
 
 # Development setup
 

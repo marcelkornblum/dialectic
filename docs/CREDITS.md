@@ -27,7 +27,7 @@
 
 ## Front End libraries and frameworks
 
-- AngularJS
+- ReactJS
 
 # Development Tools
 

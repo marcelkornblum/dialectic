@@ -1,6 +1,6 @@
-.sass-cache
+.sass-cache/
 .idea
-node_modules
-bower_components
+node_modules/
+bower_components/
+dist/
 npm-debug.log
-dist
