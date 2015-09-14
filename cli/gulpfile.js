@@ -16,7 +16,7 @@ var reload = browserSync.reload;
 
 
 var source = require('vinyl-source-stream'),
-    sourceScriptFile = './app/scripts/app.js',
+    sourceScriptFile = './app/scripts/AppBootstrap.js',
     destScriptFolder = './dist/scripts/',
     destScriptFileName = 'bundle.js';
 var buffer = require('vinyl-buffer');

@@ -7,8 +7,8 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var CommentConstants = require('../constants/CommentConstants');
+var AppDispatcher = require('../AppDispatcher');
+var CommentConstants = require('../components/comments/CommentConstants');
 
 var CHANGE_EVENT = 'change';
 

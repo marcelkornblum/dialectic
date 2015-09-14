@@ -5,8 +5,8 @@
  * CommentActions
  */
 
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var CommentConstants = require('../constants/CommentConstants');
+var AppDispatcher = require('../AppDispatcher');
+var CommentConstants = require('../components/comments/CommentConstants');
 
 var CommentActions = {
 

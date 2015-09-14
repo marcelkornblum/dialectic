@@ -40,7 +40,7 @@
     "engines": {
         "node": ">=0.10.0"
     },
-    "main": "./app/scripts/app.js",
+    "main": "./app/scripts/AppBootstrap.js",
     "browser": {
         "jquery": "./bower_components/jquery/dist/jquery.js"
     },

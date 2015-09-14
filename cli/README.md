@@ -10,7 +10,9 @@ The aim will be to keep all software and libraries up to date as far as possible
 
 # Framework
 
-To start with, we will be using React, along with several helper libraries (detailed on the [Credits](../docs/CREDITS.md) page).
+To start with, we will be using React, along with several helper libraries (detailed on the [Credits](../docs/CREDITS.md) page). Browserify, jQuery..
+
+Folder structure is similar to the Flux default as per the tutorial, modified as per http://stackoverflow.com/a/29982852/1738951.
 
 # Development setup
 

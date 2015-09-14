@@ -4,7 +4,7 @@
 * ... and from the Flux tutorial app:
 * https://github.com/facebook/flux/blob/master/examples/flux-todomvc/js/components/TodoApp.react.js
 *
-* CommentBox
+* CommentSection
 */
 
 /**
@@ -27,7 +27,7 @@ function getCommentState() {
     };
 }
 
-var CommentBox = React.createClass({
+var CommentSection = React.createClass({
 
     handleCommentSubmit: function(comment) {
         CommentActions.create(this.props.url, comment.author, comment.text);
@@ -68,7 +68,7 @@ var CommentBox = React.createClass({
 
 });
 
-module.exports = CommentBox;
+module.exports = CommentSection;
 
 
 
@@ -84,7 +84,7 @@ module.exports = CommentBox;
 
 
 
-// var CommentBox = React.createClass({
+// var CommentSection = React.createClass({
 //   getInitialState: function() {
 //     return {data: []};
 //   },
