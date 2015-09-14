@@ -16,9 +16,9 @@ var reload = browserSync.reload;
 
 
 var source = require('vinyl-source-stream'),
-    sourceScriptFile = './app/scripts/main.js',
+    sourceScriptFile = './app/scripts/app.js',
     destScriptFolder = './dist/scripts/',
-    destScriptFileName = 'main.js';
+    destScriptFileName = 'bundle.js';
 var buffer = require('vinyl-buffer');
 
 var bowerFiles = require('main-bower-files');
@@ -48,7 +48,7 @@ function debugBundle() {
         // log errors if they happen
         .on('error', $.util.log.bind($.util, 'Browserify Error'))
         .pipe(source(destScriptFileName))
-        .pipe(gulp.dest(destScriptFolder))
+        .pipe(gulp.dest('./app/scripts/'))
         .on('end', function() {
             reload();
         });
@@ -61,8 +61,8 @@ gulp.task('scripts', function() {
         .bundle()
         .pipe(source(destScriptFileName))
         .pipe(buffer())
-        // .pipe($.stripDebug())
-        // .pipe($.uglify())
+        .pipe($.stripDebug())
+        .pipe($.uglify())
         .pipe(gulp.dest(destScriptFolder));
 });
 
@@ -80,7 +80,7 @@ gulp.task('debugSass', function() {
         .on('error', $.rubySass.logError)
         .pipe($.sourcemaps.write())
         .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('./app/styles'))
         .pipe($.size());
 });
 
@@ -128,7 +128,7 @@ gulp.task('fonts', function() {
 });
 
 // Bundle
-var doBundling = function() {
+var bundleBowerLibs = function() {
     return gulp.src('./app/*.html')
         .pipe($.useref.assets())
         .pipe($.useref.assets().restore())
@@ -136,10 +136,10 @@ var doBundling = function() {
         .pipe(gulp.dest('dist'));
 };
 gulp.task('devBundle', ['debugStyles', 'debugScripts'], function() {
-    doBundling();
+    // doBundling();
 });
 gulp.task('bundle', ['styles', 'scripts'], function() {
-    doBundling();
+    bundleBowerLibs();
 });
 
 // Robots.txt and favicon.ico
@@ -151,7 +151,7 @@ gulp.task('extras', function() {
 });
 
 // Watch
-gulp.task('watch', ['html', 'fonts', 'devBundle'], function() {
+gulp.task('watch', ['devBundle'], function() {
 
     browserSync({
         notify: false,
@@ -160,16 +160,13 @@ gulp.task('watch', ['html', 'fonts', 'devBundle'], function() {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: ['dist', 'app']
+        server: ['app', '.']
     });
 
-    // Watch .json files
-    gulp.watch('app/scripts/**/*.json', ['json']);
-
     // Watch .html files
-    gulp.watch('app/*.html', ['html']);
+    gulp.watch('app/*.html', reload);
 
-    gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['debugStyles', 'debugScripts', reload]);
+    gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['debugStyles', reload]);
 
     // Watch image files
     gulp.watch('app/images/**/*', reload);
