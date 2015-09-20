@@ -56,8 +56,8 @@ var VoteSection = React.createClass({
             <h1>Votes</h1>
             {this.state.total} Total
             Your vote: {this.state.userVote}
-            <button value="UP" onClick={this.handleVoteUpSubmit} class={this.state.userUpVote ? "selected": "plain"}>UP</button>
-            <button value="DOWN" onClick={this.handleVoteDownSubmit} class={this.state.userDownVote ? "selected": "plain"}>DOWN</button>
+            <button value="UP" onClick={this.handleVoteUpSubmit} className={this.state.userUpVote ? "selected": "plain"}>UP</button>
+            <button value="DOWN" onClick={this.handleVoteDownSubmit} className={this.state.userDownVote ? "selected": "plain"}>DOWN</button>
             </div>
             );
     },

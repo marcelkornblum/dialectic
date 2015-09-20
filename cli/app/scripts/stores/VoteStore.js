@@ -3,6 +3,7 @@
  */
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var reqwest = require('reqwest');
 var AppDispatcher = require('../AppDispatcher');
 var AppConstants = require('../AppConstants');
 var VoteConstants = require('../components/votes/VoteConstants');
@@ -72,20 +73,20 @@ function vote(baseurl, objectType, objectId, userId, isUpvote) {
     // register change
 
     // this is from the original react tutorial
-    // $.ajax({
+    // reqwest({
     //     url: baseurl,
-    //     dataType: 'json',
-    //     type: 'POST',
+    //     type: 'json',
+    //     method: 'POST',
     //     data: {
     //         author: author,
     //         text: text
     //     },
+    //     error: function(xhr, status, err) {
+    //         console.error(baseurl, status, err.toString());
+    //     }.bind(this),
     //     success: function(data) {
     //         _votes = data;
     //         VoteStore.emitChange();
-    //     }.bind(this),
-    //     error: function(xhr, status, err) {
-    //         console.error(baseurl, status, err.toString());
     //     }.bind(this)
     // });
     VoteStore.emitChange();
@@ -104,7 +105,7 @@ function getTotalVotesForObject(objectType, objectId) {
         // we need to calculate it
         _totals[objectType][objectId] = 0;
         var objectVotes = getVotesForObject(objectType, objectId);
-        $.each(objectVotes, function(key, value) {
+        _.each(objectVotes, function(value) {
             if (value !== undefined) {
                 if (value.isUpvote === true) {
                     _totals[objectType][objectId] += 1;
@@ -138,9 +139,10 @@ function getVotesForObject(objectType, objectId) {
  * @param  {string} baseurl is the url to GET a list of data from
  */
 function loadFromServerForObject(baseurl, objectType, objectId) {
-    $.ajax({
+    reqwest({
         url: getBaseURLForObject(baseurl, objectType, objectId),
-        dataType: 'json',
+        type: 'json',
+        method: 'GET',
         cache: false,
         success: function(data) {
             populateLocalData(data);
@@ -159,13 +161,13 @@ function loadFromServerForObject(baseurl, objectType, objectId) {
 function populateLocalData(data) {
     _votes = []; // should we reset before adding in new values? or allow partial overrides?
     _totals = [];
-    $.each(data, function(typeKey, objectTypeObject) {
+    _.each(data, function(objectTypeObject) {
         var objectType = objectTypeObject.objectType;
         _votes[objectType] = [];
-        $.each(objectTypeObject.values, function(idKey, objectIdObject) {
+        _.each(objectTypeObject.values, function(objectIdObject) {
             var objectId = objectIdObject.objectId;
             _votes[objectType][objectId] = [];
-            $.each(objectIdObject.values, function(voteKey, voteObject) {
+            _.each(objectIdObject.values, function(voteObject) {
                 _votes[objectType][objectId][voteObject.userId] = { isUpvote: voteObject.isUpvote };
             });
         });

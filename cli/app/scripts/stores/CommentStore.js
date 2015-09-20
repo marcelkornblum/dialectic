@@ -5,6 +5,7 @@
  * CommentStore
  */
 var EventEmitter = require('events').EventEmitter;
+var reqwest = require('reqwest');
 var assign = require('object-assign');
 var AppDispatcher = require('../AppDispatcher');
 var CommentConstants = require('../components/comments/CommentConstants');
@@ -31,10 +32,10 @@ function create(baseurl, author, text) {
     };
 
     // this is from the original react tutorial
-    $.ajax({
+    reqwest({
         url: baseurl,
-        dataType: 'json',
-        type: 'POST',
+        type: 'json',
+        method: 'POST',
         data: {
             author: author,
             text: text
@@ -78,9 +79,10 @@ function updateAll(baseurl, updates) {
 * @param  {string} baseurl is the url to GET a list of data from
 */
 function loadFromServer(baseurl) {
-    $.ajax({
+    reqwest({
         url: baseurl,
-        dataType: 'json',
+        type: 'json',
+        method: 'GET',
         cache: false,
         success: function(data) {
             _comments = data;
