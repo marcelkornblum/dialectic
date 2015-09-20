@@ -1,12 +1,11 @@
 /*
-* Heavily cribbed from the Flux tutorial app:
-* https://github.com/facebook/flux/blob/master/examples/flux-todomvc/js/stores/TodoStore.js
-*
-* CommentStore
-*/
+ * Heavily cribbed from the Flux tutorial app:
+ * https://github.com/facebook/flux/blob/master/examples/flux-todomvc/js/stores/TodoStore.js
+ *
+ * CommentStore
+ */
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-
 var AppDispatcher = require('../AppDispatcher');
 var CommentConstants = require('../components/comments/CommentConstants');
 
@@ -16,7 +15,7 @@ var _comments = {};
 
 /**
 * Create a Comment.
-* @param  {string} baseurl is the url to POST a single comment to
+* @param  {string} baseurl is the URL to POST comments to, the specific URL is built from this
 * @param  {string} author The author of the Comment
 * @param  {string} text The content of the Comment
 */
@@ -52,16 +51,19 @@ function create(baseurl, author, text) {
 
 /**
 * Update a Comment.
+* @param  {string} baseurl is the URL to POST comments to, the specific URL is built from this
 * @param  {string} id
 * @param {object} updates An object literal containing only the data to be
 *     updated.
 */
 function update(baseurl, id, updates) {
     _comments[id] = assign({}, _comments[id], updates);
+    // @TODO PUT update
 }
 
 /**
 * Update all of the Comments with the same object.
+* @param  {string} baseurl is the URL to POST comments to, the specific URL is built from this
 * @param  {object} updates An object literal containing only the data to be
 *     updated.
 */
@@ -92,10 +94,12 @@ function loadFromServer(baseurl) {
 
 /**
 * Delete a Comment.
+* @param  {string} baseurl is the URL to POST comments to, the specific URL is built from this
 * @param  {string} id
 */
 function destroy(baseurl, id) {
     delete _comments[id];
+    // @TODO PUT deletion
 }
 
 var CommentStore = assign({}, EventEmitter.prototype, {

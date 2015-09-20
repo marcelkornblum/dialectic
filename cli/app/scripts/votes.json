@@ -1,0 +1,103 @@
+[
+    {
+        "objectType": "evidence",
+        "values": [
+            {
+                "objectId": 2,
+                "values": [
+                    {
+                        "userId": 33,
+                        "isUpvote": true
+                    },
+                    {
+                        "userId": 34,
+                        "isUpvote": false
+                    },
+                    {
+                        "userId": 333,
+                        "isUpvote": true
+                    },
+                    {
+                        "userId": 3333,
+                        "isUpvote": true
+                    }
+                ]
+            },
+            {
+                "objectId": 3,
+                "values": [
+                    {
+                        "userId": 33,
+                        "isUpvote": true
+                    },
+                    {
+                        "userId": 34,
+                        "isUpvote": false
+                    },
+                    {
+                        "userId": 3333,
+                        "isUpvote": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "objectType": "policy",
+        "values": [
+            {
+                "objectId": 1,
+                "values": [
+                    {
+                        "userId": 33,
+                        "isUpvote": false
+                    }
+                ]
+            },
+            {
+                "objectId": 5,
+                "values": [
+                    {
+                        "userId": 33,
+                        "isUpvote": false
+                    },
+                    {
+                        "userId": 333,
+                        "isUpvote": false
+                    },
+                    {
+                        "userId": 3333,
+                        "isUpvote": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "objectType": "topic",
+        "values": [
+            {
+                "objectId": 1,
+                "values": [
+                    {
+                        "userId": 3333,
+                        "isUpvote": true
+                    }
+                ]
+            },
+            {
+                "objectId": 55,
+                "values": [
+                    {
+                        "userId": 34,
+                        "isUpvote": false
+                    },
+                    {
+                        "userId": 333,
+                        "isUpvote": true
+                    }
+                ]
+            }
+        ]
+    }
+]

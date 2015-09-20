@@ -14,6 +14,8 @@ To start with, we will be using React, along with several helper libraries (deta
 
 Folder structure is similar to the Flux default as per the tutorial, modified as per http://stackoverflow.com/a/29982852/1738951.
 
+pass flat vars around rather than objects; link objects only when needed so as to limit the amount of overhead
+
 # Development setup
 
 The development process for the Front End part of this project will use [NodeJS](http://nodejs.org/) and [NPM](https://www.npmjs.com/), [Gulp](http://gulpjs.com/), [Bower](http://bower.io/), [SASS](http://sass-lang.com/) and [Yeoman](http://yeoman.io/).
