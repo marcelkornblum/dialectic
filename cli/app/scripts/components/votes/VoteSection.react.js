@@ -7,6 +7,7 @@
  * the VoteStore and passes the new data to its children.
  */
 var React = require('react');
+var cx = require('classnames');
 var VoteStore = require('../../stores/VoteStore');
 var VoteActions = require('../../actions/VoteActions');
 
@@ -51,13 +52,29 @@ var VoteSection = React.createClass({
     * @return {object}
     */
     render: function() {
+        var sectionClasses = cx({
+            'vote-section': true,
+            'has-voted': !this.state.userNoVote,
+            'has-voted--Up': this.state.userUpVote,
+            'has-voted--Down': this.state.userDownVote
+        });
+        var upButtonClasses = cx({
+            'up-vote-Action': true,
+            'selected': this.state.userUpVote
+        });
+        var downButtonClasses = cx({
+            'down-vote-Action': true,
+            'selected': this.state.userDownVote
+        });
         return (
-            <div className="votes">
-            <h1>Votes</h1>
-            {this.state.total} Total
-            Your vote: {this.state.userVote}
-            <button value="UP" onClick={this.handleVoteUpSubmit} className={this.state.userUpVote ? "selected": "plain"}>UP</button>
-            <button value="DOWN" onClick={this.handleVoteDownSubmit} className={this.state.userDownVote ? "selected": "plain"}>DOWN</button>
+            <div className={sectionClasses}>
+                <button onClick={this.handleVoteUpSubmit}
+                    className={upButtonClasses}
+                    disabled={this.state.userUpVote ? "disabled": ""}>&Delta;</button><br />
+                <abbr title={this.state.total + " " + this.props.title}>{this.state.total}</abbr><br />
+                <button onClick={this.handleVoteDownSubmit}
+                    className={downButtonClasses}
+                    disabled={this.state.userDownVote ? "disabled": ""}>&nabla;</button>
             </div>
             );
     },

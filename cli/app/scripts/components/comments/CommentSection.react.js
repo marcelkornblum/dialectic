@@ -50,10 +50,12 @@ var CommentSection = React.createClass({
     */
     render: function() {
         return (
-            <div className="comments">
-            <h1>Comments</h1>
-            <CommentList allComments={this.state.allComments} />
-            <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+            <div className="comment-section">
+                <h1>Comments</h1>
+                <CommentList
+                    allComments={this.state.allComments} />
+                <CommentForm
+                    onCommentSubmit={this.handleCommentSubmit} />
             </div>
             );
     },

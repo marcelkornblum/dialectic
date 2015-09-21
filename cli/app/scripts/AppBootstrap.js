@@ -7,6 +7,12 @@ React.render(
     document.getElementById('comments')
 );
 React.render(
-    <VoteSection url="scripts/votes.json" pollInterval={200000} userId="33" objectType="evidence" objectId="2" />,
+    <VoteSection
+        url="scripts/votes.json"
+        pollInterval={200000}
+        userId="33"
+        objectType="evidence"
+        objectId="2"
+        title="votes" />,
     document.getElementById('votes')
 );
