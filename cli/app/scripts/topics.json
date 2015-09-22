@@ -1,0 +1,9 @@
+[
+    {
+        "id": 2,
+        "name": "Environment",
+        "summary": "The natural world",
+        "description": "Issues around the environment in the UK and globally, encompassing climate change and species preservation as well as air and water pollution",
+        "state": "published"
+    }
+]

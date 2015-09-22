@@ -1,0 +1,15 @@
+[
+    {
+        "topicId": 2,
+        "values": [
+            {
+                "id": 5445,
+                "name": "Shale Gas",
+                "summary": "Leaked files showing the scale of government intrusions",
+                "description": "Much longer text description, supporting *markdown*",
+                "state": "published",
+                "selected": false
+            }
+        ]
+    }
+]

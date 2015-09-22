@@ -1,0 +1,15 @@
+[
+    {
+        "topicId": 2,
+        "values": [
+            {
+                "id": 456,
+                "name": "Snowden Files",
+                "url": "http://lmgtfy.com?q=redact%20me",
+                "summary": "Leaked files showing the scale of government intrusions",
+                "description": "Much longer text description, supporting *markdown*",
+                "attribution": "Edward Snowden"
+            }
+        ]
+    }
+]
